@@ -180,7 +180,6 @@ func readAtomHeader(rd io.Reader) (*Atom, error) {
 	// containers with additional implicit header
 	if string(a.Type) == "meta" {
 		offset := len(a.RawHeader)
-		a.Size += metaSubheaderSize
 		a.RawHeader = append(a.RawHeader, make([]byte, metaSubheaderSize)...)
 		if err := a.MustRead(a.RawHeader[offset:]); err != nil {
 			return nil, err
